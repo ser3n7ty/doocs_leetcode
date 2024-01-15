@@ -4,11 +4,6 @@ class Solution:
         bulky = any(x >= 10000 for x in (length, width, height)) or v >= 10**9
         heavy = mass >= 100
 
-        if bulky and heavy:
-            return "Both"
         if bulky:
-            return "Bulky"
-        if heavy:
-            return "Heavy"
-
-        return "Neither"
+            return "Both" if heavy else "Bulky"
+        return "Heavy" if heavy else "Neither"

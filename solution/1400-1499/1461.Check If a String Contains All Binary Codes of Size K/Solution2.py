@@ -10,4 +10,4 @@ class Solution:
             b = ord(s[i]) - ord('0')
             num = ((num - a) << 1) + b
             vis[num] = True
-        return all(v for v in vis)
+        return all(vis)

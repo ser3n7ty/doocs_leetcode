@@ -9,10 +9,7 @@ class Solution:
         f = [inf] * (1 << m)
         f[0] = 0
         for i in range(1, 1 << m):
-            s = 0
-            for j, x in enumerate(nums):
-                if i >> j & 1:
-                    s += x
+            s = sum(x for j, x in enumerate(nums) if i >> j & 1)
             if s == 0:
                 f[i] = i.bit_count() - 1
                 j = (i - 1) & i

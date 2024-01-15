@@ -44,4 +44,4 @@ class Solution:
         for i, x in enumerate(nums):
             for j in p[x]:
                 uf.union(i, j + n)
-        return len(set(uf.find(i) for i in range(n))) == 1
+        return len({uf.find(i) for i in range(n)}) == 1

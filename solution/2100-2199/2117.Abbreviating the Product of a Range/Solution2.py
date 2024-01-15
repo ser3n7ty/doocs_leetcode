@@ -26,5 +26,5 @@ class Solution:
             while pre > 1e5:
                 pre /= 10
         if gt:
-            return str(int(pre)) + "..." + str(suf % int(1e5)).zfill(5) + 'e' + str(c)
-        return str(suf) + "e" + str(c)
+            return f"{int(pre)}...{str(suf % int(100000.0)).zfill(5)}e{str(c)}"
+        return f"{str(suf)}e{str(c)}"

@@ -3,6 +3,6 @@ class Solution:
         ans = k = 1
         for _ in range(time):
             ans += k
-            if ans == 1 or ans == n:
+            if ans in [1, n]:
                 k *= -1
         return ans

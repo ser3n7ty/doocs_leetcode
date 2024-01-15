@@ -6,7 +6,7 @@ class Solution:
         i, k = 0, -1
         for c in s:
             g[i].append(c)
-            if i == 0 or i == numRows - 1:
+            if i in [0, numRows - 1]:
                 k = -k
             i += k
         return ''.join(chain(*g))

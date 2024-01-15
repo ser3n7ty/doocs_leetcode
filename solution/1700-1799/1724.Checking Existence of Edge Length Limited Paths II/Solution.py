@@ -5,9 +5,7 @@ class PersistentUnionFind:
         self.version = [inf] * n
 
     def find(self, x, t=inf):
-        if self.p[x] == x or self.version[x] >= t:
-            return x
-        return self.find(self.p[x], t)
+        return x if self.p[x] == x or self.version[x] >= t else self.find(self.p[x], t)
 
     def union(self, a, b, t):
         pa, pb = self.find(a), self.find(b)

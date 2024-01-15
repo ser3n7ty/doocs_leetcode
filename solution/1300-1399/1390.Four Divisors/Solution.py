@@ -7,7 +7,7 @@ class Solution:
                 if x % i == 0:
                     cnt += 1
                     s += i
-                    if i * i != x:
+                    if i**2 != x:
                         cnt += 1
                         s += x // i
                 i += 1

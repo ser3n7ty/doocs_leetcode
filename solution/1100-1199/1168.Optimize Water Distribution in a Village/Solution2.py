@@ -27,8 +27,7 @@ class Solution:
     def minCostToSupplyWater(
         self, n: int, wells: List[int], pipes: List[List[int]]
     ) -> int:
-        for i, w in enumerate(wells, 1):
-            pipes.append([0, i, w])
+        pipes.extend([0, i, w] for i, w in enumerate(wells, 1))
         pipes.sort(key=lambda x: x[2])
         uf = UnionFind(n + 1)
         ans = 0

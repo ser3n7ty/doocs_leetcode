@@ -3,7 +3,7 @@ class Solution:
         ans = []
         for i in range(1, 9):
             x = i
-            for j in range(i + 1, 10):
+            for j in range(x + 1, 10):
                 x = x * 10 + j
                 if low <= x <= high:
                     ans.append(x)

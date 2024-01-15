@@ -5,7 +5,7 @@ class Solution:
         while i < n and s[i] == "a":
             i += 1
         if i == n:
-            return s[:-1] + "z"
+            return f"{s[:-1]}z"
         j = i
         while j < n and s[j] != "a":
             j += 1

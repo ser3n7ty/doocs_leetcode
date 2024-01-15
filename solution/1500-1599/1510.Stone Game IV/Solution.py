@@ -5,8 +5,8 @@ class Solution:
             if i == 0:
                 return False
             j = 1
-            while j * j <= i:
-                if not dfs(i - j * j):
+            while j**2 <= i:
+                if not dfs(i - j**2):
                     return True
                 j += 1
             return False

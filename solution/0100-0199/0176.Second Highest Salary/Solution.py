@@ -14,7 +14,4 @@ def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
     if second_highest is None:
         return pd.DataFrame({"SecondHighestSalary": [None]})
 
-    # Create a DataFrame with the second highest salary
-    result_df = pd.DataFrame({"SecondHighestSalary": [second_highest]})
-
-    return result_df
+    return pd.DataFrame({"SecondHighestSalary": [second_highest]})

@@ -44,12 +44,12 @@ class Solution:
 
         q = ((dist[i][j], i, j) for i in range(n) for j in range(n))
         q = sorted(q, reverse=True)
-        uf = UnionFind(n * n)
+        uf = UnionFind(n**2)
         for d, i, j in q:
             for a, b in pairwise(dirs):
                 x, y = i + a, j + b
                 if 0 <= x < n and 0 <= y < n and dist[x][y] >= d:
                     uf.union(i * n + j, x * n + y)
-            if uf.find(0) == uf.find(n * n - 1):
+            if uf.find(0) == uf.find(n**2 - 1):
                 return int(d)
         return 0

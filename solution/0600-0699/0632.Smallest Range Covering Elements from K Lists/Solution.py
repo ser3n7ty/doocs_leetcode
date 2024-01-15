@@ -5,7 +5,7 @@ class Solution:
         cnt = Counter()
         ans = [-inf, inf]
         j = 0
-        for i, (b, v) in enumerate(t):
+        for b, v in t:
             cnt[v] += 1
             while len(cnt) == len(nums):
                 a = t[j][0]

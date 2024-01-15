@@ -3,9 +3,7 @@ class Solution:
         @cache
         def dfs(i, t):
             if i == n:
-                if t == target:
-                    return 1
-                return 0
+                return 1 if t == target else 0
             return dfs(i + 1, t + nums[i]) + dfs(i + 1, t - nums[i])
 
         ans, n = 0, len(nums)

@@ -1,7 +1,7 @@
 class Solution:
     def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
         dirs = (0, 1, 0, -1, 0)
-        s = {(x, y) for x, y in obstacles}
+        s = set(obstacles)
         ans = k = 0
         x = y = 0
         for c in commands:

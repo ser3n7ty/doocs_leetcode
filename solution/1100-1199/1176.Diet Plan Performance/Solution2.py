@@ -5,9 +5,7 @@ class Solution:
         def check(s):
             if s < lower:
                 return -1
-            if s > upper:
-                return 1
-            return 0
+            return 1 if s > upper else 0
 
         s, n = sum(calories[:k]), len(calories)
         ans = check(s)

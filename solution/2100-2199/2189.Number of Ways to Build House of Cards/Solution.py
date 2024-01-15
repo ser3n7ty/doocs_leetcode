@@ -5,8 +5,6 @@ class Solution:
             x = 3 * k + 2
             if x > n:
                 return 0
-            if x == n:
-                return 1
-            return dfs(n - x, k + 1) + dfs(n, k + 1)
+            return 1 if x == n else dfs(n - x, k + 1) + dfs(n, k + 1)
 
         return dfs(n, 0)

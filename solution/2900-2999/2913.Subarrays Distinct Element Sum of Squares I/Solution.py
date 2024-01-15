@@ -5,5 +5,5 @@ class Solution:
             s = set()
             for j in range(i, n):
                 s.add(nums[j])
-                ans += len(s) * len(s)
+                ans += len(s)**2
         return ans

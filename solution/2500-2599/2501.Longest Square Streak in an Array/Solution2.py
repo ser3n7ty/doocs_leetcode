@@ -2,9 +2,7 @@ class Solution:
     def longestSquareStreak(self, nums: List[int]) -> int:
         @cache
         def dfs(x):
-            if x not in s:
-                return 0
-            return 1 + dfs(x * x)
+            return 0 if x not in s else 1 + dfs(x * x)
 
         s = set(nums)
         ans = max(dfs(x) for x in nums)

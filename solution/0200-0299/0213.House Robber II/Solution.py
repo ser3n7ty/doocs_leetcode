@@ -6,6 +6,4 @@ class Solution:
                 f, g = max(f, g), f + x
             return max(f, g)
 
-        if len(nums) == 1:
-            return nums[0]
-        return max(_rob(nums[1:]), _rob(nums[:-1]))
+        return nums[0] if len(nums) == 1 else max(_rob(nums[1:]), _rob(nums[:-1]))

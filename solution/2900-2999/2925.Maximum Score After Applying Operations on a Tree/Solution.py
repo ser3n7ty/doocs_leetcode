@@ -11,9 +11,7 @@ class Solution:
                     aa, bb = dfs(j, i)
                     a += aa
                     b += bb
-            if leaf:
-                return values[i], 0
-            return values[i] + a, max(values[i] + b, a)
+            return (values[i], 0) if leaf else (values[i] + a, max(values[i] + b, a))
 
         g = [[] for _ in range(len(values))]
         for a, b in edges:

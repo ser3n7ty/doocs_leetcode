@@ -12,6 +12,6 @@ class Solution:
         d = defaultdict(list)
         for i, c in enumerate(s):
             d[find(i)].append(c)
-        for i in d.keys():
+        for i in d:
             d[i].sort(reverse=True)
         return "".join(d[find(i)].pop() for i in range(n))

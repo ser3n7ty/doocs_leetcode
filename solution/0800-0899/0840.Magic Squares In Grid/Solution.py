@@ -21,9 +21,7 @@ class Solution:
                         b += v
             if len(s) != 9 or a != b:
                 return 0
-            if any(x != a for x in row) or any(x != a for x in col):
-                return 0
-            return 1
+            return 0 if any(x != a for x in row) or any(x != a for x in col) else 1
 
         m, n = len(grid), len(grid[0])
         return sum(check(i, j) for i in range(m) for j in range(n))

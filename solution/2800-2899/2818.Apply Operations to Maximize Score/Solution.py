@@ -1,7 +1,7 @@
 def primeFactors(n):
     i = 2
     ans = set()
-    while i * i <= n:
+    while i**2 <= n:
         while n % i == 0:
             ans.add(i)
             n //= i

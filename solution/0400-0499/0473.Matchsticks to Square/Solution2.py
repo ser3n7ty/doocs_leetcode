@@ -15,6 +15,4 @@ class Solution:
 
         s, mod = divmod(sum(matchsticks), 4)
         matchsticks.sort()
-        if mod:
-            return False
-        return dfs(0, 0)
+        return False if mod else dfs(0, 0)

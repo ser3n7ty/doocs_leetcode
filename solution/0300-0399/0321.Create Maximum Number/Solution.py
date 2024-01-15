@@ -23,9 +23,7 @@ class Solution:
                 return True
             if nums1[i] > nums2[j]:
                 return True
-            if nums1[i] < nums2[j]:
-                return False
-            return compare(nums1, nums2, i + 1, j + 1)
+            return False if nums1[i] < nums2[j] else compare(nums1, nums2, i + 1, j + 1)
 
         def merge(nums1: List[int], nums2: List[int]) -> List[int]:
             m, n = len(nums1), len(nums2)

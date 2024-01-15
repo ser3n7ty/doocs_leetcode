@@ -19,7 +19,7 @@ class BinaryIndexedTree:
 class Solution:
     def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
         s = list(accumulate(nums, initial=0))
-        arr = sorted(set(v for x in s for v in (x, x - lower, x - upper)))
+        arr = sorted({v for x in s for v in (x, x - lower, x - upper)})
         tree = BinaryIndexedTree(len(arr))
         ans = 0
         for x in s:

@@ -1,6 +1,6 @@
 class Solution:
     def paintingPlan(self, n: int, k: int) -> int:
-        if k == n * n:
+        if k == n**2:
             return 1
         ans = 0
         for i in range(n + 1):

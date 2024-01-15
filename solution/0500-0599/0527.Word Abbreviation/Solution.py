@@ -16,9 +16,7 @@ class Trie:
 
     def search(self, w: str) -> int:
         node = self
-        cnt = 0
-        for c in w:
-            cnt += 1
+        for cnt, c in enumerate(w, start=1):
             idx = ord(c) - ord("a")
             node = node.children[idx]
             if node.cnt == 1:

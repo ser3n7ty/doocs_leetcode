@@ -6,8 +6,6 @@ class Solution:
             if (k & (k - 1)) == 0:
                 return 1
             m = 1 << n
-            if k * 2 < m - 1:
-                return dfs(n - 1, k)
-            return dfs(n - 1, m - k) ^ 1
+            return dfs(n - 1, k) if k * 2 < m - 1 else dfs(n - 1, m - k) ^ 1
 
         return str(dfs(n, k))

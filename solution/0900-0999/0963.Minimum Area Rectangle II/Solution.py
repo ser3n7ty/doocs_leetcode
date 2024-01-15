@@ -1,6 +1,6 @@
 class Solution:
     def minAreaFreeRect(self, points: List[List[int]]) -> float:
-        s = {(x, y) for x, y in points}
+        s = set(points)
         n = len(points)
         ans = inf
         for i in range(n):

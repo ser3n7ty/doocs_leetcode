@@ -13,7 +13,8 @@ user_agent = (
     "Chrome/77.0.3865.120 Safari/537.36"
 )
 sub_folders = [
-    str(i * 100).zfill(4) + "-" + str(i * 100 + 99).zfill(4) for i in range(1000)
+    f"{str(i * 100).zfill(4)}-{str(i * 100 + 99).zfill(4)}"
+    for i in range(1000)
 ]
 cn_graph_url = "https://leetcode.cn/graphql"
 difficulty = dict(Easy="简单", Medium="中等", Hard="困难")
@@ -89,7 +90,7 @@ class Spider:
             "user-agent": user_agent,
             "cookie": self.cookie_en,
         }
-        question_url = "https://leetcode.com/problems" + question_title_slug
+        question_url = f"https://leetcode.com/problems{question_title_slug}"
         en_graph_url = "https://leetcode.com/graphql"
         form = {
             "operationName": "questionData",
@@ -113,7 +114,7 @@ class Spider:
                     "User-Agent": user_agent,
                     "Connection": "keep-alive",
                     "Content-Type": "application/json",
-                    "Referer": "https://leetcode.com/problems/" + slug,
+                    "Referer": f"https://leetcode.com/problems/{slug}",
                     "cookie": self.cookie_en,
                 }
                 resp = requests.post(
@@ -155,7 +156,7 @@ class Spider:
             "User-Agent": user_agent,
             "Connection": "keep-alive",
             "Content-Type": "application/json",
-            "Referer": "https://leetcode.cn/problems/" + question_title_slug,
+            "Referer": f"https://leetcode.cn/problems/{question_title_slug}",
             "cookie": self.cookie_cn,
         }
 
@@ -348,10 +349,8 @@ class Contest:
 
 def get_contests(fetch_new=True) -> List:
     res = [] if fetch_new else load_contest_result()
-    t = 0
     d = {x.get("contest_title_slug"): x for x in res}
-    for r in (weekly_range, biweekly_range):
-        t += 1
+    for t, r in enumerate((weekly_range, biweekly_range), start=1):
         cnt = 0
         for i in r:
             c = Contest(i, contest_type=t)
@@ -384,8 +383,7 @@ def run():
     question_details = {}
     if not refresh_all:
         for item in load_result():
-            slug = item.get("question_title_slug")
-            if slug:
+            if slug := item.get("question_title_slug"):
                 question_details[slug] = item
 
     for q in spider.get_all_questions_v2(retry=6):

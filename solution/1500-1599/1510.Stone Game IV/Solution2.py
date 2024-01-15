@@ -4,7 +4,7 @@ class Solution:
         for i in range(1, n + 1):
             j = 1
             while j <= i // j:
-                if not f[i - j * j]:
+                if not f[i - j**2]:
                     f[i] = True
                     break
                 j += 1

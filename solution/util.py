@@ -83,10 +83,7 @@ def load_contest_result() -> List[dict]:
     if not os.path.exists(contest_result_file):
         return []
     with open(contest_result_file, "r", encoding="utf-8") as f:
-        res = f.read()
-        if res:
-            return json.loads(res)
-        return []
+        return json.loads(res) if (res := f.read()) else []
 
 
 def save_result(data: List[dict]):
@@ -104,7 +101,7 @@ def select_templates(category):
         return [bash_readme_cn, bash_readme_en]
     if category == "Database":
         return [sql_readme_cn, sql_readme_en]
-    if category == "JavaScript" or category == "TypeScript":
+    if category in ["JavaScript", "TypeScript"]:
         return [ts_readme_cn, ts_readme_en]
     return [problem_readme_cn, problem_readme_en]
 
@@ -113,24 +110,22 @@ def generate_readme(result):
     md_table_cn = [item["md_table_row_cn"] for item in result]
     md_table_en = [item["md_table_row_en"] for item in result]
 
-    # generate README.md
-    items = []
-    table_cn = "\n|  题号  |  题解  |  标签  |  难度  | 备注 |\n| --- | --- | --- | --- | --- |"
-    for item in sorted(md_table_cn, key=lambda x: x[0]):
-        items.append(
-            f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
-        )
-    table_cn += "".join(items)
-
-    # generate README_EN.md
-    items = []
-    table_en = "\n|  #  |  Solution  |  Tags  |  Difficulty  |  Remark |\n| --- | --- | --- | --- | --- |"
-    for item in sorted(md_table_en, key=lambda x: x[0]):
-        items.append(
-            f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
-        )
-    table_en += "".join(items)
-
+    items = [
+        f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
+        for item in sorted(md_table_cn, key=lambda x: x[0])
+    ]
+    table_cn = (
+        "\n|  题号  |  题解  |  标签  |  难度  | 备注 |\n| --- | --- | --- | --- | --- |"
+        + "".join(items)
+    )
+    items = [
+        f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
+        for item in sorted(md_table_en, key=lambda x: x[0])
+    ]
+    table_en = (
+        "\n|  #  |  Solution  |  Tags  |  Difficulty  |  Remark |\n| --- | --- | --- | --- | --- |"
+        + "".join(items)
+    )
     with open("./README.md", "w", encoding="utf-8") as f:
         f.write(readme_cn.format(table_cn))
     with open("./README_EN.md", "w", encoding="utf-8") as f:
@@ -183,10 +178,10 @@ def generate_summary(result):
     summary_cn = summary_en = ""
     m = {int(item["frontend_question_id"]): item for item in result}
     for file in sorted(os.listdir("./"), key=lambda x: x.lower()):
-        if os.path.isdir("./" + file) and file != "__pycache__":
+        if os.path.isdir(f"./{file}") and file != "__pycache__":
             summary_cn += f"\n- {file}\n"
             summary_en += f"\n- {file}\n"
-            for sub in sorted(os.listdir("./" + file), key=lambda x: x.lower()):
+            for sub in sorted(os.listdir(f"./{file}"), key=lambda x: x.lower()):
                 sub = sub.replace("`", " ")
                 enc = quote(sub)
                 if not sub[:4].isdigit():
@@ -211,15 +206,17 @@ def generate_summary(result):
 def generate_category_summary(result, category=""):
     """generate category summary files"""
     summary_cn = (
-        "- " + category_dict.get(category, category) + "专项练习\n\n" if category else ""
+        f"- {category_dict.get(category, category)}" + "专项练习\n\n"
+        if category
+        else ""
     )
-    summary_en = "- " + category + " Practice\n\n" if category else ""
+    summary_en = f"- {category}" + " Practice\n\n" if category else ""
     category = category.lower() if category else ""
-    sub_category = category + "-" if category else ""
+    sub_category = f"{category}-" if category else ""
     m = {int(item["frontend_question_id"]): item for item in result}
     for file in sorted(os.listdir("./"), key=lambda x: x.lower()):
-        if os.path.isdir("./" + file) and file != "__pycache__":
-            for sub in sorted(os.listdir("./" + file), key=lambda x: x.lower()):
+        if os.path.isdir(f"./{file}") and file != "__pycache__":
+            for sub in sorted(os.listdir(f"./{file}"), key=lambda x: x.lower()):
                 sub = sub.replace("`", " ")
                 enc = quote(sub)
                 if not sub[:4].isdigit():
@@ -254,26 +251,27 @@ def generate_category_readme(result, category=""):
 
     # generate README.md
     items = []
-    table_cn = "\n|  题号  |  题解  |  标签  |  难度  | 备注 |\n| --- | --- | --- | --- | --- |"
-    for item in sorted(md_table_cn, key=lambda x: x[0]):
-        if category and m[int(item[0])]["category"] != category:
-            continue
-        items.append(
-            f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
-        )
-    table_cn += "".join(items)
-
+    items.extend(
+        f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
+        for item in sorted(md_table_cn, key=lambda x: x[0])
+        if not category or m[int(item[0])]["category"] == category
+    )
+    table_cn = (
+        "\n|  题号  |  题解  |  标签  |  难度  | 备注 |\n| --- | --- | --- | --- | --- |"
+        + "".join(items)
+    )
     # generate README_EN.md
     items = []
-    table_en = "\n|  #  |  Solution  |  Tags  |  Difficulty  |  Remark |\n| --- | --- | --- | --- | --- |"
-    for item in sorted(md_table_en, key=lambda x: x[0]):
-        if category and m[int(item[0])]["category"] != category:
-            continue
-        items.append(
-            f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
-        )
-    table_en += "".join(items)
-    path_prefix = category.upper() + "_" if category else ""
+    items.extend(
+        f"\n|  {item[0]}  |  {item[1]}  |  {item[2]}  |  {item[3]}  |  {item[4]}  |"
+        for item in sorted(md_table_en, key=lambda x: x[0])
+        if not category or m[int(item[0])]["category"] == category
+    )
+    table_en = (
+        "\n|  #  |  Solution  |  Tags  |  Difficulty  |  Remark |\n| --- | --- | --- | --- | --- |"
+        + "".join(items)
+    )
+    path_prefix = f"{category.upper()}_" if category else ""
     with open(f"./{path_prefix}README.md", "w", encoding="utf-8") as f:
         f.write(
             category_readme_cn.format(

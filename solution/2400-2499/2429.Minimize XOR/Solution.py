@@ -7,7 +7,7 @@ class Solution:
                 x |= 1 << i
                 cnt -= 1
         for i in range(30):
-            if num1 >> i & 1 ^ 1 and cnt:
+            if num1 >> i & 0 and cnt:
                 x |= 1 << i
                 cnt -= 1
         return x

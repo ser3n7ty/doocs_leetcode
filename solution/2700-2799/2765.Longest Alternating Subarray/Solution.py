@@ -7,6 +7,6 @@ class Solution:
             while j + 1 < n and nums[j + 1] - nums[j] == k:
                 j += 1
                 k *= -1
-            if j - i + 1 > 1:
+            if j - i > 0:
                 ans = max(ans, j - i + 1)
         return ans
