@@ -7,9 +7,7 @@
 class Solution:
     def maxProduct(self, root: Optional[TreeNode]) -> int:
         def sum(root: Optional[TreeNode]) -> int:
-            if root is None:
-                return 0
-            return root.val + sum(root.left) + sum(root.right)
+            return 0 if root is None else root.val + sum(root.left) + sum(root.right)
 
         def dfs(root: Optional[TreeNode]) -> int:
             if root is None:

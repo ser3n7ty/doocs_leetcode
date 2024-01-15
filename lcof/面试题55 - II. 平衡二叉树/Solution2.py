@@ -14,8 +14,6 @@ class Solution:
             l, ld = dfs(root.left)
             r, rd = dfs(root.right)
             d = max(ld, rd) + 1
-            if l and r and abs(ld - rd) <= 1:
-                return (True, d)
-            return (False, d)
+            return (True, d) if l and r and abs(ld - rd) <= 1 else (False, d)
 
         return dfs(root)[0]

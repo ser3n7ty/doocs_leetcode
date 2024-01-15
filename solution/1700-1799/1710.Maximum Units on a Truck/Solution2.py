@@ -5,8 +5,7 @@ class Solution:
             cnt[b] += a
         ans = 0
         for b in range(1000, 0, -1):
-            a = cnt[b]
-            if a:
+            if a := cnt[b]:
                 ans += b * min(truckSize, a)
                 truckSize -= a
                 if truckSize <= 0:

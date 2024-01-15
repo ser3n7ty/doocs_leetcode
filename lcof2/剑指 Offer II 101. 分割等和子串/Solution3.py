@@ -10,8 +10,6 @@ class Solution:
             nonlocal target
             if s > target or i >= len(nums):
                 return False
-            if s == target:
-                return True
-            return dfs(i + 1, s) or dfs(i + 1, s + nums[i])
+            return True if s == target else dfs(i + 1, s) or dfs(i + 1, s + nums[i])
 
         return dfs(0, 0)

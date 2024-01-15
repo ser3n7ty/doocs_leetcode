@@ -16,4 +16,4 @@ class Solution:
 
         a = f(x1, x2, xCenter)
         b = f(y1, y2, yCenter)
-        return a * a + b * b <= radius * radius
+        return a * a + b * b <= radius**2

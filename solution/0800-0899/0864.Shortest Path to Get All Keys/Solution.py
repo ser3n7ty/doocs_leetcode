@@ -23,11 +23,10 @@ class Solution:
                     # 在边界范围内
                     if 0 <= x < m and 0 <= y < n:
                         c = grid[x][y]
-                        # 是墙，或者是锁，但此时没有对应的钥匙，无法通过
                         if (
                             c == '#'
                             or c.isupper()
-                            and (state & (1 << (ord(c) - ord('A')))) == 0
+                            and nxt & 1 << (ord(c) - ord('A')) == 0
                         ):
                             continue
                         # 是钥匙

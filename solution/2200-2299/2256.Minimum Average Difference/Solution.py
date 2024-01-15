@@ -7,7 +7,7 @@ class Solution:
             pre += x
             suf -= x
             a = pre // (i + 1)
-            b = 0 if n - i - 1 == 0 else suf // (n - i - 1)
+            b = 0 if n - i == 1 else suf // (n - i - 1)
             if (t := abs(a - b)) < mi:
                 ans = i
                 mi = t

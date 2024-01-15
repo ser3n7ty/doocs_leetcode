@@ -17,8 +17,7 @@ class Solution:
             elif s[i] == "-":
                 sign = -1
             elif s[i] == "(":
-                stk.append(ans)
-                stk.append(sign)
+                stk.extend((ans, sign))
                 ans, sign = 0, 1
             elif s[i] == ")":
                 ans = stk.pop() * ans + stk.pop()

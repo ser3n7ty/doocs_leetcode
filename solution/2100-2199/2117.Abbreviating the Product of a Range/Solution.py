@@ -28,6 +28,6 @@ class Solution:
                 y *= x
                 gt = y >= 1e10
         if not gt:
-            return str(y) + "e" + str(c)
+            return f"{str(y)}e{str(c)}"
         pre = int(pow(10, z - int(z) + 4))
-        return str(pre) + "..." + str(suf).zfill(5) + "e" + str(c)
+        return f"{pre}...{str(suf).zfill(5)}e{str(c)}"

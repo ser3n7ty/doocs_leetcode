@@ -4,7 +4,7 @@ class FirstUnique:
         self.unique = OrderedDict({v: 1 for v in nums if self.cnt[v] == 1})
 
     def showFirstUnique(self) -> int:
-        return -1 if not self.unique else next(v for v in self.unique.keys())
+        return -1 if not self.unique else next(iter(self.unique.keys()))
 
     def add(self, value: int) -> None:
         self.cnt[value] += 1

@@ -3,8 +3,5 @@ class Solution:
         ans = 100
         for a in nums1:
             for b in nums2:
-                if a == b:
-                    ans = min(ans, a)
-                else:
-                    ans = min(ans, 10 * a + b, 10 * b + a)
+                ans = min(ans, a) if a == b else min(ans, 10 * a + b, 10 * b + a)
         return ans

@@ -12,8 +12,5 @@ class Solution:
             if t < mi or (t == mi and root.val < ans):
                 mi = t
                 ans = root.val
-            if root.val > target:
-                root = root.left
-            else:
-                root = root.right
+            root = root.left if root.val > target else root.right
         return ans

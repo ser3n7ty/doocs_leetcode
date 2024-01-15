@@ -11,7 +11,4 @@ class Solution:
             if x & lb:
                 a ^= x
         b = xs ^ a
-        for x in nums:
-            if x == a:
-                return [a, b]
-        return [b, a]
+        return next(([a, b] for x in nums if x == a), [b, a])

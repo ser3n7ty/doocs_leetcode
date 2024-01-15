@@ -7,11 +7,7 @@ class Solution:
             k = i + j
             if i < m and s1[i] == s3[k] and dfs(i + 1, j):
                 return True
-            if j < n and s2[j] == s3[k] and dfs(i, j + 1):
-                return True
-            return False
+            return bool(j < n and s2[j] == s3[k] and dfs(i, j + 1))
 
         m, n = len(s1), len(s2)
-        if m + n != len(s3):
-            return False
-        return dfs(0, 0)
+        return False if m + n != len(s3) else dfs(0, 0)

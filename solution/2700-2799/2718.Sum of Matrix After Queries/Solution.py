@@ -8,8 +8,7 @@ class Solution:
                 if i not in row:
                     ans += v * (n - len(col))
                     row.add(i)
-            else:
-                if i not in col:
-                    ans += v * (n - len(row))
-                    col.add(i)
+            elif i not in col:
+                ans += v * (n - len(row))
+                col.add(i)
         return ans

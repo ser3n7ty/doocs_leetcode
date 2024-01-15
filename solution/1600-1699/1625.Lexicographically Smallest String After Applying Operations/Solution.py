@@ -5,8 +5,7 @@ class Solution:
         ans = s
         while q:
             s = q.popleft()
-            if ans > s:
-                ans = s
+            ans = min(ans, s)
             t1 = ''.join(
                 [str((int(c) + a) % 10) if i & 1 else c for i, c in enumerate(s)]
             )

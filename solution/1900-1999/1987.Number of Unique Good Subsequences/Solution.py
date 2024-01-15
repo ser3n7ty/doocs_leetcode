@@ -9,5 +9,4 @@ class Solution:
                 ans = 1
             else:
                 f = (f + g + 1) % mod
-        ans = (ans + f + g) % mod
-        return ans
+        return (ans + f + g) % mod

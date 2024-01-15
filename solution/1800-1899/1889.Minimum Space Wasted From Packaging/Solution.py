@@ -13,6 +13,4 @@ class Solution:
                 s += (j - i) * b
                 i = j
             ans = min(ans, s)
-        if ans == inf:
-            return -1
-        return (ans - sum(packages)) % mod
+        return -1 if ans == inf else (ans - sum(packages)) % mod

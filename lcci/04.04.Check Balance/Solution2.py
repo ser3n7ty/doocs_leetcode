@@ -12,8 +12,6 @@ class Solution:
             if root is None:
                 return 0
             l, r = dfs(root.left), dfs(root.right)
-            if l == -1 or r == -1 or abs(l - r) > 1:
-                return -1
-            return max(l, r) + 1
+            return -1 if l == -1 or r == -1 or abs(l - r) > 1 else max(l, r) + 1
 
         return dfs(root) >= 0

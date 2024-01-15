@@ -12,6 +12,4 @@ class Solution:
         n = len(s1)
         idx = [i for i in range(n) if s1[i] != s2[i]]
         m = len(idx)
-        if m & 1:
-            return -1
-        return dfs(0, m - 1)
+        return -1 if m & 1 else dfs(0, m - 1)

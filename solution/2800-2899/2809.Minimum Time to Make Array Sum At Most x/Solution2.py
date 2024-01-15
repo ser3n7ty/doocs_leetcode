@@ -7,7 +7,4 @@ class Solution:
                 f[j] = max(f[j], f[j - 1] + a + b * j)
         s1 = sum(nums1)
         s2 = sum(nums2)
-        for j in range(n + 1):
-            if s1 + s2 * j - f[j] <= x:
-                return j
-        return -1
+        return next((j for j in range(n + 1) if s1 + s2 * j - f[j] <= x), -1)

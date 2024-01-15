@@ -1,9 +1,7 @@
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
         def check(i: int, j: int) -> int:
-            if s[i] == "0" and i != j:
-                return False
-            return 0 <= int(s[i : j + 1]) <= 255
+            return False if s[i] == "0" and i != j else 0 <= int(s[i : j + 1]) <= 255
 
         def dfs(i: int):
             if i >= n and len(t) == 4:

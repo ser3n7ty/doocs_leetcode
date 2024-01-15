@@ -1,6 +1,4 @@
 class Solution:
     def replaceSpace(self, s: str) -> str:
-        ans = []
-        for c in s:
-            ans.append('%20' if c == ' ' else c)
+        ans = ['%20' if c == ' ' else c for c in s]
         return ''.join(ans)

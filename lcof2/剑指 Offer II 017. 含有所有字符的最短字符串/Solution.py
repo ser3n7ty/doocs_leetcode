@@ -20,7 +20,4 @@ class Solution:
         return "" if minLen == inf else s[start : start + minLen]
 
     def check(self, need, window):
-        for k, v in need.items():
-            if window[k] < v:
-                return False
-        return True
+        return all(window[k] >= v for k, v in need.items())

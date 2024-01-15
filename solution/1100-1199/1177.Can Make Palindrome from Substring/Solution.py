@@ -5,8 +5,7 @@ class Solution:
         for i, c in enumerate(s, 1):
             ss[i] = ss[i - 1][:]
             ss[i][ord(c) - ord("a")] += 1
-        ans = []
-        for l, r, k in queries:
-            cnt = sum((ss[r + 1][j] - ss[l][j]) & 1 for j in range(26))
-            ans.append(cnt // 2 <= k)
-        return ans
+        return [
+            sum((ss[r + 1][j] - ss[l][j]) & 1 for j in range(26)) // 2 <= k
+            for l, r, k in queries
+        ]

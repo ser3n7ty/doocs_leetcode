@@ -26,7 +26,7 @@ class Solution:
 
         match = [-1] * (m * n)
         ans = 0
-        for i in g.keys():
+        for i in g:
             vis = set()
             ans += find(i)
         return ans

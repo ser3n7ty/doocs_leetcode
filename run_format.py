@@ -231,7 +231,7 @@ def add_header(path: str):
         content = "package main\n" + content
     elif path.endswith(".sql"):
         for func in functions_to_replace:
-            pattern = r"\b{}\s*\(".format(func)
+            pattern = f"\b{func}\s*\("
             content = re.sub(pattern, f"{func.upper()}(", content, flags=re.IGNORECASE)
     else:
         return
@@ -264,7 +264,7 @@ def find_all_paths() -> List[str]:
     paths = []
     for root, _, files in os.walk(os.getcwd()):
         for file in files:
-            path = root + "/" + file
+            path = f"{root}/{file}"
             if "node_modules" in path or "__pycache__" in path or ".git" in path:
                 continue
             if any(path.endswith(f".{suf}") for suf in suffixes):
@@ -308,7 +308,7 @@ def format_inline_code(path: str):
                 content = content.replace(block, new_block)
             elif suf == "sql":
                 for func in functions_to_replace:
-                    pattern = r"\b{}\s*\(".format(func)
+                    pattern = f"\b{func}\s*\("
                     new_block = re.sub(
                         pattern, f"{func.upper()}(", block, flags=re.IGNORECASE
                     )

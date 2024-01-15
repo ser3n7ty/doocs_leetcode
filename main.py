@@ -27,17 +27,17 @@ def extract_code():
     paths = []
     for root, _, files in os.walk(os.getcwd()):
         for file in files:
-            path = root + "/" + file
+            path = f"{root}/{file}"
             if "node_modules" in path or "__pycache__" in path or ".git" in path:
                 continue
             if root == "D:\github-repo\leetcode":
                 continue
             if path.endswith("README.md"):
                 paths.append(path)
+    mark = "<!-- tabs:start -->"
     for path in paths:
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
-        mark = "<!-- tabs:start -->"
         i = content.find(mark)
         if i == -1:
             continue
@@ -83,7 +83,7 @@ def extract_solution_paragraph():
     paths = []
     for root, _, files in os.walk(os.getcwd()):
         for file in files:
-            path = root + "/" + file
+            path = f"{root}/{file}"
             if "node_modules" in path or "__pycache__" in path or ".git" in path:
                 continue
             if root == "D:\github-repo\leetcode":

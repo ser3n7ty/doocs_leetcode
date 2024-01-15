@@ -10,7 +10,4 @@ class Solution:
                     f[i][j] = min(f[i][j], ceil(f[i - 1][j] + x / speed - eps))
                 if j:
                     f[i][j] = min(f[i][j], f[i - 1][j - 1] + x / speed)
-        for j in range(n + 1):
-            if f[n][j] <= hoursBefore + eps:
-                return j
-        return -1
+        return next((j for j in range(n + 1) if f[n][j] <= hoursBefore + eps), -1)

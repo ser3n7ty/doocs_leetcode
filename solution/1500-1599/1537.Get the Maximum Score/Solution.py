@@ -5,18 +5,12 @@ class Solution:
         i = j = 0
         f = g = 0
         while i < m or j < n:
-            if i == m:
+            if i == m or j != n and nums1[i] >= nums2[j] and nums1[i] > nums2[j]:
                 g += nums2[j]
                 j += 1
-            elif j == n:
+            elif j == n or nums1[i] < nums2[j]:
                 f += nums1[i]
                 i += 1
-            elif nums1[i] < nums2[j]:
-                f += nums1[i]
-                i += 1
-            elif nums1[i] > nums2[j]:
-                g += nums2[j]
-                j += 1
             else:
                 f = g = max(f, g) + nums1[i]
                 i += 1

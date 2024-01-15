@@ -3,7 +3,7 @@ class Solution:
         if target < -1000 or target > 1000:
             return 0
         n = len(nums)
-        dp = [[0] * 2001 for i in range(n)]
+        dp = [[0] * 2001 for _ in range(n)]
         dp[0][nums[0] + 1000] += 1
         dp[0][-nums[0] + 1000] += 1
         for i in range(1, n):
